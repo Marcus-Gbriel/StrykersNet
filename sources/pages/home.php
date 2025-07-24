@@ -1,0 +1,1 @@
+<script src="/public/teste.js"></script>
