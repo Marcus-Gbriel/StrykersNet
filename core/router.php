@@ -38,7 +38,7 @@ class router
      * @return void
      * 
      */
-    public function __construct($core)
+    public function __construct(Core $core)
     {
         $this->core = $core;
         $this->init();
@@ -97,7 +97,7 @@ class router
     {
         $uri = $_SERVER['REQUEST_URI'];
         $parts = explode('/', trim($uri, '/'));
-        return $parts[$level] ?? '';
+        return $parts[$level] ?: 'home';
     }
 
     /**
