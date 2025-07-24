@@ -22,7 +22,7 @@ class PublicController
      * @return void
      * 
      */
-    public function __construct($core, $router)
+    public function __construct(Core $core, Router $router)
     {
         $this->core = $core;
         $this->router = $router;
