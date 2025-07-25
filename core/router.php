@@ -25,8 +25,11 @@ class router
             'about' => 'PageController@about',
             'contact' => 'PageController@contact',
             'public' => 'PublicController@index',
+            'api' => 'ApiController@index',
         ],
-        'POST' => [],
+        'POST' => [
+            'api' => 'ApiController@index',
+        ],
         'PUT' => [],
         'DELETE' => [],
     ];
@@ -75,6 +78,8 @@ class router
             return;
         }
 
+        //importante: implantar a verificação de classe e médoto
+        // se a classe não existir, retornar erro 500
         $controller_name = $this->extract_controller($method, $route);
         if (!class_exists($controller_name[0])) {
             $this->core->error_in_execution(404);
@@ -97,6 +102,9 @@ class router
     {
         $uri = $_SERVER['REQUEST_URI'];
         $parts = explode('/', trim($uri, '/'));
+        if ($level < 0 || $level >= count($parts)) {
+            return '';
+        }
         return $parts[$level] ?: 'home';
     }
 
