@@ -66,6 +66,7 @@ class ApiController
 
         $class_method = $this->routes[$method][$route];
         if (!$this->class_exists($class_method)) {
+            $this->core->register_log('error class not found - ' . $class_method);
             $this->respose_api(
                 'class not found',
                 500,
@@ -123,7 +124,11 @@ class ApiController
             return false;
         }
 
-        if (!class_exists($class_method[0]) && !method_exists($class_method[0], $class_method[1])) {
+        if (!class_exists($class_method[0])) {
+            return false;
+        }
+
+        if (!method_exists($class_method[0], $class_method[1])) {
             return false;
         }
 
