@@ -37,7 +37,13 @@ class PublicController
      */
     public function index(): void
     {
-        if ($this->final_array() == '') {
+        // Fazer uma melhor implementação desse método
+        // Verificar melhor se o arquivo existe
+        // e se o último segmento da URL não está vazio
+        // para evitar erros de diretório
+        
+        $file_name = $this->get_filename();
+        if (empty($file_name) || $file_name !== 'public') {
             $file_path = DOCUMENT_ROOT . $_SERVER['REQUEST_URI'] ?? '';
             if (!file_exists($file_path)) {
                 $this->core->error(404);
@@ -60,9 +66,9 @@ class PublicController
      * @return string Último segmento da URL
      * 
      */
-    private function final_array(): string
+    private function get_filename(): string
     {
-        $router = trim('/', $_SERVER['REQUEST_URI'] ?? '');
+        $router = basename($_SERVER['REQUEST_URI']);
         $router = explode('/', $router);
         return end($router);
     }
