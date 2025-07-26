@@ -12,7 +12,7 @@ class PublicController
 {
     private $core = null;
     private $router = null;
-    
+
     /**
      * 
      * Contrutor do controlador público
@@ -43,9 +43,7 @@ class PublicController
                 $this->core->error(404);
             }
 
-            $content_type = mime_content_type($file_path) ?: 'application/octet-stream';
-
-            header('Content-Type: ' . $content_type);
+            header('Content-Type: ' . $this->define_content_type($file_path));
             header('Content-Length: ' . filesize($file_path));
 
             readfile($file_path);
@@ -67,5 +65,22 @@ class PublicController
         $router = trim('/', $_SERVER['REQUEST_URI'] ?? '');
         $router = explode('/', $router);
         return end($router);
+    }
+
+    /**
+     * 
+     * Método para definir o tipo de conteúdo com base na extensão do arquivo
+     * 
+     * @param string $file_path Caminho do arquivo
+     * @return string Tipo de conteúdo
+     * 
+     */
+    private function define_content_type(string $file_path): string
+    {
+        if (str_ends_with($file_path, '.css')) {
+            return 'text/css';
+        } else {
+            return mime_content_type($file_path) ?: 'application/octet-stream';
+        }
     }
 }
