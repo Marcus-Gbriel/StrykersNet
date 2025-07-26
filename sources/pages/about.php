@@ -1,5 +1,5 @@
-<h1>Welcome to Strykers</h1>
-<p>This is the home page.</p>
+<h1>Sobre</h1>
+<p>Esta é a página sobre.</p>
 <p>
     <button move-to="home">Home</button>
     <button move-to="about">Sobre</button>
