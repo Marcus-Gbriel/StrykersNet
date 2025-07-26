@@ -46,6 +46,13 @@ class ApiController
         $this->handleRequest();
     }
 
+    /**
+     * 
+     * Método para lidar com a requisição da API
+     * 
+     * @return void
+     * 
+     */
     private function handleRequest(): void
     {
         header('Content-Type: application/json');
@@ -66,7 +73,7 @@ class ApiController
 
         $class_method = $this->routes[$method][$route];
         if (!$this->class_exists($class_method)) {
-            $this->core->register_log('error class not found - ' . $class_method);
+            $this->core->log('error class not found - ' . $class_method);
             $this->respose_api(
                 'class not found',
                 500,
@@ -86,10 +93,13 @@ class ApiController
      * 
      * Método para retornar o status da API
      * 
+     * @param string $message Mensagem a ser retornada
+     * @param int $status Código de status HTTP (default: 200)
+     * @param array $data Dados adicionais a serem retornados (default: [])
      * @return void
      * 
      */
-    private function respose_api($message = '', $status = 200, $data = []): void
+    public function respose_api($message = '', $status = 200, $data = []): void
     {
         http_response_code($status);
         echo json_encode([
@@ -104,8 +114,8 @@ class ApiController
      * 
      * Verifica se a rota existe
      * 
-     * @param string $method
-     * @param string $route
+     * @param string $method Método HTTP (GET, POST, etc.)
+     * @param string $route Rota solicitada
      * @return bool
      * 
      */
@@ -117,6 +127,14 @@ class ApiController
         return false;
     }
 
+    /**
+     * 
+     * Verifica se a classe e o método existem
+     * 
+     * @param string $class_method Texto no formato 'ClassName@methodName'
+     * @return bool
+     * 
+     */
     private function class_exists(string $class_method): bool
     {
         $class_method = explode('@', $class_method);

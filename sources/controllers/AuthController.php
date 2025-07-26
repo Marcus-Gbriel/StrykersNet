@@ -30,17 +30,20 @@ class AuthController
      */
     public function login(): void
     {
-        // Implementar lógica de autenticação aqui
-        // Exemplo: verificar credenciais, gerar token, etc.
-        //$this->core->response_api('Login successful', 200);
-        echo json_encode([
-            'status' => 'success',
-            'message' => 'Login successful',
-            'address' => $_SESSION['address'],
-        ]);
+        $database = new database($this->core);
+
+
+        $result = $database->query("SELECT * FROM users WHERE id = 1");
+        $result = $result->fetch(PDO::FETCH_ASSOC);
+        if ($result) {
+            $this->api_controller->respose_api('successo na busca do usuário', 200, $data = $result);
+        } else {
+            $this->api_controller->respose_api('Usuário não encontrado', 404);
+        }
     }
 
-    private function handleRequest(): void {
+    private function handleRequest(): void
+    {
         session_start();
         $_SESSION['address'] = $_SERVER['REMOTE_ADDR'];
     }

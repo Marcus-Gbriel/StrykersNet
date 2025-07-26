@@ -74,20 +74,28 @@ class router
     private function handle_request(string $method, string $route): void
     {
         if (!isset(self::$routes[$method][$route])) {
-            $this->core->error_in_execution(404);
+            $this->core->error(404);
             return;
         }
 
         //importante: implantar a verificação de classe e médoto
         // se a classe não existir, retornar erro 500
-        $controller_name = $this->extract_controller($method, $route);
-        if (!class_exists($controller_name[0])) {
-            $this->core->error_in_execution(404);
+
+        if (!array_key_exists($route, self::$routes[$method])) {
+            $this->core->error(500);
             return;
         }
 
-        $controller = new $controller_name[0]($this->core, $this);
-        $controller->{$controller_name[1]}();
+        $controller_method = self::$routes[$method][$route];
+        if (!$this->verify_route($controller_method)) {
+            $this->core->error(500);
+            return;
+        }
+
+        $controller_method = explode('@', $controller_method);
+
+        $controller = new $controller_method[0]($this->core, $this);
+        $controller->{$controller_method[1]}();
     }
 
     /**
@@ -122,16 +130,28 @@ class router
 
     /**
      * 
-     * Extrai o controlador da rota
+     * Verifica se a rota existe
      * 
-     * @param string $route Rota da requisição
-     * @param string $method Método HTTP
-     * @return array Controlador e método
+     * @param string $method Método HTTP (GET, POST, etc.)
+     * @param string $route Rota solicitada
+     * @return bool
      * 
      */
-    private function extract_controller(string $method, string $route): array
+    private function verify_route(string $class_method): bool
     {
-        $action = self::$routes[$method][$route];
-        return explode('@', $action) ?? [];
+        $class_method = explode('@', $class_method);
+        if (count($class_method) !== 2) {
+            return false;
+        }
+
+        if (!class_exists($class_method[0])) {
+            return false;
+        }
+
+        if (!method_exists($class_method[0], $class_method[1])) {
+            return false;
+        }
+
+        return true;
     }
 }

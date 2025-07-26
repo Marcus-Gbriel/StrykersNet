@@ -40,7 +40,7 @@ class PublicController
         if (!$this->final_array() != '') {
             $file_path = DOCUMENT_ROOT . $_SERVER['REQUEST_URI'] ?? '';
             if (!file_exists($file_path)) {
-                $this->core->error_in_execution(404);
+                $this->core->error(404);
             }
 
             $content_type = mime_content_type($file_path) ?: 'application/octet-stream';
@@ -51,7 +51,7 @@ class PublicController
             readfile($file_path);
             exit;
         } else {
-            $this->core->error_in_execution(404);
+            $this->core->error(404);
         }
     }
 
