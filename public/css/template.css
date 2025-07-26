@@ -14,10 +14,8 @@
     box-sizing: border-box;
     font-family: 'Exo 2', sans-serif;
     /*font-family: 'Orbitron', sans-serif;*/
-}
 
-body {
-    background-color: #202529;
-    color: #ffffff;
-    
+    a {
+        cursor: pointer;
+    }
 }
