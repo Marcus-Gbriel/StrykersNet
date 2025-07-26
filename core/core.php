@@ -74,21 +74,20 @@ class core
     {
         $config_file = DOCUMENT_ROOT . '/config.json';
         if (!file_exists($config_file)) {
-            $this->register_log('Config file not found: ' . $config_file, 'ERROR');
-            $this->error_in_execution();
+            $this->log('Config file not found: ' . $config_file, 'ERROR');
+            $this->error();
             return;
         }
 
         $config = json_decode(file_get_contents($config_file), true);
 
         if (json_last_error() !== JSON_ERROR_NONE) {
-            $this->register_log('Error decoding JSON config: ' . json_last_error_msg(), 'ERROR');
-            $this->error_in_execution();
+            $this->log('Error decoding JSON config: ' . json_last_error_msg(), 'ERROR');
+            $this->error();
             return;
         }
 
         define('CONFIG', $config);
-        $this->register_log('Config loaded successfully', 'INFO');
     }
 
     /**
@@ -112,7 +111,8 @@ class core
                 }
             }
         } catch (Exception $e) {
-            throw new Exception('Error creating directories: ' . $e->getMessage());
+            $this->log('Error creating directories: ' . $e->getMessage(), 'ERROR');
+            $this->error();
         }
     }
 
@@ -124,7 +124,7 @@ class core
      * @return void
      * 
      */
-    public function error_in_execution(int $code = 500): void
+    public function error(int $code = 500): void
     {
         http_response_code($code);
     }
@@ -138,7 +138,7 @@ class core
      * @return void
      * 
      */
-    public function register_log(string $message, $level = 'INFO'): void
+    public function log(string $message, $level = 'INFO'): void
     {
         $document_file = DOCUMENT_ROOT . '/storage/logs/' . date('Y_m_d') . '.log';
         $log_message = sprintf("[%s] [%s]: %s\n", date('Y-m-d H:i:s'), $level, $message);
