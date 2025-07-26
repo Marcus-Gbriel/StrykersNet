@@ -26,6 +26,8 @@ class router
             'contact' => 'PageController@contact',
             'public' => 'PublicController@index',
             'api' => 'ApiController@index',
+            'login' => 'PageController@login',
+            'robots.txt' => 'PageController@robots',
         ],
         'POST' => [
             'api' => 'ApiController@index',
@@ -86,12 +88,14 @@ class router
 
         if (!array_key_exists($route, self::$routes[$method])) {
             $this->core->error(500);
+            $this->core->log("Rota não encontrada: $method $route");
             return;
         }
 
         $controller_method = self::$routes[$method][$route];
         if (!$this->verify_route($controller_method)) {
             $this->core->error(500);
+            $this->core->log("Rota inválida: $controller_method");
             return;
         }
 
