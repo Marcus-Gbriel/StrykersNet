@@ -2,13 +2,31 @@
 
 class RouteController
 {
-    public function home(): void
+    private $core = null;
+    private $router = null;
+    private $apiController = null;
+
+    public function __construct(Core $core, Router $router, ApiController $apiController)
     {
-        require_once 'sources/pages/home.php';
+        $this->core = $core;
+        $this->router = $router;
+        $this->apiController = $apiController;
     }
 
-    public function about(): void
+    public function index(): void
     {
-        require_once 'sources/pages/about.php';
+        $this->handleRequest();
+    }
+
+    private function handleRequest(): void
+    {
+        $page = $this->router->get_request_uri(2);
+        $file_path = DOCUMENT_ROOT . '/sources/pages/' . $page . '.php';
+
+        if (!file_exists($file_path)) {
+            $this->core->error(404);
+        }
+
+        require_once $file_path;
     }
 }

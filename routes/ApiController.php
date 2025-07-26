@@ -13,12 +13,12 @@ class ApiController
     private $core = null;
     private $router = null;
     private $routes = [
-        'GET' => [
-            'routes?page=home' => 'RouteController@home',
-            'routes?page=about' => 'RouteController@about',
-        ],
+        'GET' => [],
         'POST' => [
             'login' => 'AuthController@login',
+        ],
+        'PATCH' => [
+            'routes' => 'RouteController@index',
         ],
     ];
 

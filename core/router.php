@@ -32,6 +32,9 @@ class router
         ],
         'PUT' => [],
         'DELETE' => [],
+        'PATCH' => [
+            'api' => 'ApiController@index',
+        ],
     ];
 
     /**
@@ -75,6 +78,7 @@ class router
     {
         if (!isset(self::$routes[$method][$route])) {
             $this->core->error(404);
+            var_dump(self::$routes);
             return;
         }
 
@@ -110,6 +114,7 @@ class router
     {
         $uri = $_SERVER['REQUEST_URI'];
         $parts = explode('/', trim($uri, '/'));
+        //$parts = explode('?', $parts[0]);
         if ($level < 0 || $level >= count($parts)) {
             return '';
         }
