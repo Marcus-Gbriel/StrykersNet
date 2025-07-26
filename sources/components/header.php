@@ -15,12 +15,6 @@
         const router_class = new router();
     </script>
     <title id="title_system">Document</title>
-    <style>
-        .form-control.bg-dark::placeholder {
-            color: #ccc !important;
-            opacity: 1;
-        }
-    </style>
 </head>
 
 <body id="body_system">

@@ -78,7 +78,6 @@ class router
     {
         if (!isset(self::$routes[$method][$route])) {
             $this->core->error(404);
-            var_dump(self::$routes);
             return;
         }
 

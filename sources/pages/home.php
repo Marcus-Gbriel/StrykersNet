@@ -1,5 +1,5 @@
 <div class="container_divider">
-    STRYKERS
+    <h1>STRYKERS</h1>
 </div>
 <style>
     .container_divider {
@@ -12,6 +12,10 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 5rem;
+
+        h1 {
+            font-size: 3.5rem;
+        }
+
     }
 </style>
