@@ -37,7 +37,7 @@ class PublicController
      */
     public function index(): void
     {
-        if (!$this->final_array() != '') {
+        if ($this->final_array() == '') {
             $file_path = DOCUMENT_ROOT . $_SERVER['REQUEST_URI'] ?? '';
             if (!file_exists($file_path)) {
                 $this->core->error(404);
