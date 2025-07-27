@@ -25,6 +25,7 @@ class router
             'about' => 'PageController@about',
             'contact' => 'PageController@contact',
             'public' => 'PublicController@index',
+            'divisions' => 'PageController@divisions',
             'api' => 'ApiController@index',
             'login' => 'PageController@login',
             'robots.txt' => 'PageController@robots',

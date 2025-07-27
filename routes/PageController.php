@@ -78,6 +78,11 @@ class PageController
         exit;
     }
 
+    public function divisions(): void
+    {
+        $this->render('divisions');
+    }
+
     /**
      * 
      * Método para renderizar uma página específica

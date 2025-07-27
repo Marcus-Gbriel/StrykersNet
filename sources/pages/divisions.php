@@ -1,5 +1,5 @@
 <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-    <h1>STRYKERS</h1>
+    <h1>Nossas Divisoes</h1>
     <div class="carousel-inner">
         <div class="carousel-item active">
             <div class="parallax-img" style="background-image: url('/public/imgs/starcitizen/SC_01_Wallpaper_3840x2160.jpg');"></div>
@@ -28,12 +28,12 @@
                 Excelência Militar
             </div>
             <div class="card-body">
-                <h5 class="card-title">Disciplina, Ordem e Supremacia</h5>
-                <img height="80" src="/public/icons/uee.png" alt="star-wars-rebellion-ship" />
+                <h5 class="card-title">Infantaria</h5>
                 <p class="card-text">Atuamos com excelência em todas as frentes de combate: infantaria, força aérea, marinha espacial, logística, corpo médico e forças especiais. Cada membro é treinado para alcançar o melhor desempenho no universo de Star Citizen.</p>
+                <a class="btn btn-primary">Saiba mais</a>
             </div>
             <div class="card-footer text-body-secondary">
-                
+                2 days ago
             </div>
         </div>
         <div class="card text-center">
@@ -41,12 +41,12 @@
                 Estrutura Hierárquica
             </div>
             <div class="card-body">
-                <h5 class="card-title">Crescimento e Evolução</h5>
-                <img height="80" src="/public/icons/leon.png" alt="star-wars-rebellion-ship" />
+                <h5 class="card-title">Marinha</h5>
                 <p class="card-text">Nossa hierarquia é clara e funcional, valorizando cada membro. Oferecemos caminhos para evolução, treinamentos, missões e campanhas, promovendo crescimento pessoal e coletivo dentro da organização.</p>
+                <a class="btn btn-primary">Saiba mais</a>
             </div>
             <div class="card-footer text-body-secondary">
-                
+                2 days ago
             </div>
         </div>
         <div class="card text-center">
@@ -54,12 +54,12 @@
                 Camaradagem
             </div>
             <div class="card-body">
-                <h5 class="card-title">Imersão e Propósito</h5>
-                <img height="80" src="/public/icons/missiles.png" alt="star-wars-rebellion-ship" />
+                <h5 class="card-title">Aeronautica</h5>
                 <p class="card-text">Mais do que jogar juntos, buscamos criar laços, identidade e propósito. Na STRYKERS, cada recruta, instrutor ou comandante encontra acolhimento, amizade e oportunidades para crescer no ‘verse.</p>
+                <a class="btn btn-primary">Saiba mais</a>
             </div>
             <div class="card-footer text-body-secondary">
-                
+                2 days ago
             </div>
         </div>
     </div>
