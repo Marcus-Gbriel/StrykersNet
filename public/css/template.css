@@ -19,3 +19,20 @@
         cursor: pointer;
     }
 }
+
+:root {
+    --bs-primary: #008000 !important;
+    --bs-primary-rgb: 0, 128, 0 !important;
+    --bs-btn-bg: #008000 !important;
+    --bs-btn-bg-hover: #006400 !important;
+}
+
+.btn-primary {
+    background-color: var(--bs-primary) !important;
+    border-color: var(--bs-primary) !important;
+
+    &:hover {
+        background-color: var(--bs-btn-bg-hover) !important;
+        border-color: var(--bs-btn-bg-hover) !important;
+    }
+}
