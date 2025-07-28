@@ -64,7 +64,7 @@ class ApiController
         $route = $this->router->get_request_uri(1);
 
         if (!$this->route_exists($method, $route)) {
-            $this->respose_api(
+            $this->response(
                 'invalid request',
                 404,
                 [
@@ -77,7 +77,7 @@ class ApiController
         $class_method = $this->routes[$method][$route];
         if (!$this->class_exists($class_method)) {
             $this->core->log('error class not found - ' . $class_method);
-            $this->respose_api(
+            $this->response(
                 'class not found',
                 500,
                 [
@@ -102,7 +102,7 @@ class ApiController
      * @return void
      * 
      */
-    public function respose_api($message = '', $status = 200, $data = []): void
+    public function response($message = '', $status = 200, $data = []): void
     {
         http_response_code($status);
         echo json_encode([

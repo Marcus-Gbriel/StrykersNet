@@ -36,9 +36,9 @@ class AuthController
         $result = $database->query("SELECT * FROM users WHERE id = 1");
         $result = $result->fetch(PDO::FETCH_ASSOC);
         if ($result) {
-            $this->api_controller->respose_api('successo na busca do usuário', 200, $data = $result);
+            $this->api_controller->response('successo na busca do usuário', 200, $data = $result);
         } else {
-            $this->api_controller->respose_api('Usuário não encontrado', 404);
+            $this->api_controller->response('Usuário não encontrado', 404);
         }
     }
 

@@ -69,7 +69,7 @@ class PageController
      */
     public function login(): void
     {
-        $this->render('login');
+        require_once 'sources/pages/login.php';
     }
 
     public function robots(): void

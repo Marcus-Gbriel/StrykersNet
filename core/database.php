@@ -87,4 +87,24 @@ class database
             die("Query error: " . $e->getMessage());
         }
     }
+
+    /**
+     * 
+     * Recebe todos os resultados de uma consulta SQL
+     * 
+     * @param string $sql Comando SQL a ser executado
+     * @param array $params Parâmetros para a consulta SQL
+     * @return array Retorna um array com todos os resultados da consulta
+     * 
+     */
+    public function fetchAll(string $sql, array $params = []): array
+    {
+        try {
+            $statement = $this->query($sql, $params);
+            return $statement->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            $this->core->log("Error fetching all: " . $e->getMessage(), 'error');
+            die("Fetch error: " . $e->getMessage());
+        }
+    }
 }
