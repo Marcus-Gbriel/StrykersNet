@@ -25,10 +25,10 @@
                     <img src="/public/imgs/logo.png" alt="" class="bi me-2" width="48" height="48" role="img" aria-label="Bootstrap">
                 </a>
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a move-to="home" class="nav-link px-2 link-secondary">Início</a></li>
-                    <li><a move-to="about" class="nav-link px-2 link-body-emphasis">Sobre</a></li>
+                    <li><a move-to="home" id="home" class="nav-link px-2 link-body-emphasis btnH">Início</a></li>
+                    <li><a move-to="about" id="about" class="nav-link px-2 link-body-emphasis btnH">Sobre</a></li>
                     <!--<li><a move-to="about" class="nav-link px-2 link-secondary">Sobre</a></li>-->
-                    <li><a move-to="contact" class="nav-link px-2 link-body-emphasis">Contato</a></li>
+                    <li><a move-to="contact" id="contact" class="nav-link px-2 link-body-emphasis btnH">Contato</a></li>
                 </ul>
                 <!--
                 <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
@@ -53,3 +53,45 @@
         </div>
     </header>
     <div class="container_system">
+        <script>
+            function verify_page() {
+                let page = window.location.pathname;
+
+                $('.btnH').removeClass('link-secondary');
+                $('.btnH').addClass('link-body-emphasis');
+
+                if (page == "/") {
+                    $('#home').removeClass('link-body-emphasis');
+                    $('#home').addClass('link-secondary');
+                } else if (page == "/about") {
+                    $('#about').removeClass('link-body-emphasis');
+                    $('#about').addClass('link-secondary');
+                } else if (page == "/contact") {
+                    $('#contact').removeClass('link-body-emphasis');
+                    $('#contact').addClass('link-secondary');
+                }
+            }
+
+            // #008000
+
+            $('.btnH').click(function() {
+                setTimeout(() => {
+                    verify_page();
+                }, 100);
+            })
+
+            verify_page();
+        </script>
+
+        <style>
+            .htn {
+                &:hover {
+                    transform: scale(1.20)!important;
+                    background-color: #008000 !important;
+                    font-weight: 600 !important;
+                    border-radius: 64px !important;
+                    margin-left: 15px !important ;
+                    margin-right: 15px !important;
+                }
+            }
+        </style>

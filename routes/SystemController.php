@@ -17,7 +17,7 @@ class SystemController
         // Implementação do método para lidar com requisições ao sistema
         // Aqui você pode definir a lógica para exibir a página principal do sistema
         // ou redirecionar para outra página conforme necessário.
-        echo "Bem-vindo ao Sistema!";
+        require_once DOCUMENT_ROOT . '/sources/views/index.php';
     }
 
     private function verify_access(): void
