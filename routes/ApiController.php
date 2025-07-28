@@ -105,11 +105,17 @@ class ApiController
     public function response($message = '', $status = 200, $data = []): void
     {
         http_response_code($status);
-        echo json_encode([
+
+        $response = [
             'status' => $status,
             'message' => $message,
-            'data' => $data,
-        ]);
+        ];
+
+        if (!empty($data)) {
+            $response['data'] = $data;
+        }
+
+        echo json_encode($response);
         exit;
     }
 
@@ -154,5 +160,31 @@ class ApiController
         }
 
         return true;
+    }
+
+    /**
+     * 
+     * Sanitiza a entrada de dados
+     * 
+     * @param string $data Dados a serem sanitizados
+     * @return string Dados sanitizados
+     * 
+     */
+    public function sanitize_input(string $data): string
+    {
+        return htmlspecialchars(trim($data), ENT_QUOTES, 'UTF-8');
+    }
+
+    /**
+     * 
+     * Valida um endereço de e-mail
+     *
+     * @param string $email
+     * @return boolean
+     * 
+     */
+    public function validate_email(string $email): bool
+    {
+        return filter_var($email, FILTER_VALIDATE_EMAIL) !== false;
     }
 }

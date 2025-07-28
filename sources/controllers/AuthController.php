@@ -30,16 +30,38 @@ class AuthController
      */
     public function login(): void
     {
+        /**
+         * 
+         * Implementar uma forma melhor de tratar a requisição de login
+         * 
+         */
         $database = new database($this->core);
 
+        $username = $this->api_controller->sanitize_input($_POST['username'] ?? '');
+        $password = $this->api_controller->sanitize_input($_POST['password'] ?? '');
 
-        $result = $database->query("SELECT * FROM users WHERE id = 1");
-        $result = $result->fetch(PDO::FETCH_ASSOC);
-        if ($result) {
-            $this->api_controller->response('successo na busca do usuário', 200, $data = $result);
-        } else {
-            $this->api_controller->response('Usuário não encontrado', 404);
+        if ($username == '' || $password == '') {
+            $this->api_controller->response('login data cannot be empty', 400);
         }
+
+        $result = $database->query("SELECT * FROM users WHERE username = :username", [
+            ':username' => $username
+        ]);
+        $result = $result->fetch(PDO::FETCH_ASSOC);
+
+        if (!$result) {
+            $this->api_controller->response('user not found', 404);
+        }
+
+        if (!password_verify($password, $result['password'])) {
+            $this->api_controller->response('incorrect password', 401);
+        }
+
+        $_SESSION['user_id'] = $result['id'];
+        $_SESSION['username'] = $result['username'];
+        $_SESSION['logged_in'] = true;
+
+        $this->api_controller->response('login successful', 200);
     }
 
     private function handleRequest(): void
