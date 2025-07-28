@@ -105,8 +105,14 @@ class ApiController
     public function response($message = '', $status = 200, $data = []): void
     {
         http_response_code($status);
+        $success = false;
+
+        if ($status == 200) {
+            $success = true;
+        }
 
         $response = [
+            'success' => $success,
             'status' => $status,
             'message' => $message,
         ];

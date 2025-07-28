@@ -1,3 +1,11 @@
+<?php
+/*
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+    session_destroy();
+}
+*/
+?>
 <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
     <h1>STRYKERS</h1>
     <div class="carousel-inner">
@@ -33,7 +41,6 @@
                 <p class="card-text">Atuamos com excelência em todas as frentes de combate: infantaria, força aérea, marinha espacial, logística, corpo médico e forças especiais. Cada membro é treinado para alcançar o melhor desempenho no universo de Star Citizen.</p>
             </div>
             <div class="card-footer text-body-secondary">
-                
             </div>
         </div>
         <div class="card text-center">
@@ -46,7 +53,6 @@
                 <p class="card-text">Nossa hierarquia é clara e funcional, valorizando cada membro. Oferecemos caminhos para evolução, treinamentos, missões e campanhas, promovendo crescimento pessoal e coletivo dentro da organização.</p>
             </div>
             <div class="card-footer text-body-secondary">
-                
             </div>
         </div>
         <div class="card text-center">
@@ -59,7 +65,6 @@
                 <p class="card-text">Mais do que jogar juntos, buscamos criar laços, identidade e propósito. Na STRYKERS, cada recruta, instrutor ou comandante encontra acolhimento, amizade e oportunidades para crescer no ‘verse.</p>
             </div>
             <div class="card-footer text-body-secondary">
-                
             </div>
         </div>
     </div>

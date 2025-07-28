@@ -20,7 +20,8 @@ class SystemController
         echo "Bem-vindo ao Sistema!";
     }
 
-    private function verify_access(): void {
+    private function verify_access(): void
+    {
         //verifica se a sessão está ativa
         if (session_status() !== PHP_SESSION_ACTIVE) {
             session_start();
@@ -30,6 +31,16 @@ class SystemController
             header('Location: /login');
             exit();
         }
+    }
 
+    public function logout(): void
+    {
+        // Implementação do método para lidar com logout
+        // Aqui você pode definir a lógica para encerrar a sessão do usuário
+        if (session_status() === PHP_SESSION_ACTIVE) {
+            session_destroy();
+        }
+        header('Location: /login');
+        exit();
     }
 }

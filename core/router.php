@@ -27,6 +27,7 @@ class router
             'divisions' => 'PageController@divisions',
             'login' => 'PageController@login',
             'web' => 'SystemController@index',
+            'logout' => 'SystemController@logout',
             'robots.txt' => 'PageController@robots',
             'public' => 'PublicController@index',
             'api' => 'ApiController@index',
