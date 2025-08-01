@@ -34,7 +34,6 @@ class core
         $this->load_dependencies();
         $this->load_config();
         $this->verify_directories();
-        new router($this);
     }
 
     /**
@@ -143,7 +142,7 @@ class core
         $document_file = DOCUMENT_ROOT . '/storage/logs/' . date('Y_m_d') . '.log';
         $log_message = sprintf("[%s] [%s]: %s\n", date('Y-m-d H:i:s'), $level, $message);
 
-        if (!file_exists($document_file)) {
+        if (!is_dir(dirname($document_file))) {
             mkdir(dirname($document_file), 0755, true);
         }
 

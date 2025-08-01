@@ -1,4 +1,5 @@
 <?php
+
 /**
  * 
  * Arquivo de entrada do sistema
@@ -13,4 +14,5 @@ define('DOCUMENT_ROOT', __DIR__);
 
 require_once DOCUMENT_ROOT . '/core/core.php';
 
-new core();
+$core = new core();
+new router($core);
