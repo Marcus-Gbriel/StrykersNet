@@ -5,6 +5,7 @@ class AuthController
     private $core = null;
     private $router = null;
     private $api_controller = null;
+    private $session = null;
 
     /**
      * 
@@ -35,7 +36,7 @@ class AuthController
          * Implementar uma forma melhor de tratar a requisição de login
          * 
          */
-        $database = new database($this->core);
+        $database = database::getInstance($this->core);
 
         $username = $this->api_controller->sanitize_input($_POST['username'] ?? '');
         $password = $this->api_controller->sanitize_input($_POST['password'] ?? '');
@@ -57,16 +58,15 @@ class AuthController
             $this->api_controller->response('incorrect password', 401);
         }
 
-        $_SESSION['user_id'] = $result['id'];
-        $_SESSION['username'] = $result['username'];
-        $_SESSION['logged_in'] = true;
+        $this->session->set('user_id', $result['id']);
+        $this->session->set('username', $result['username']);
+        $this->session->set('logged_in', true);
 
         $this->api_controller->response('login successful', 200);
     }
 
     private function handleRequest(): void
     {
-        session_start();
-        $_SESSION['address'] = $_SERVER['REMOTE_ADDR'];
+        $this->session = new session();
     }
 }
