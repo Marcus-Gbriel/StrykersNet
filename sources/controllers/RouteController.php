@@ -20,7 +20,7 @@ class RouteController
 
     private function handleRequest(): void
     {
-        $page = $this->router->get_request_uri(2);
+        $page = $this->router->getRequestUri(2);
         $file_path = DOCUMENT_ROOT . '/sources/pages/' . $page . '.php';
 
         if (!file_exists($file_path)) {

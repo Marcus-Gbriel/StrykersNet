@@ -26,7 +26,7 @@ class PageController
 
     /**
      * 
-     * Método para exibir a página inicial
+     * Método para exibir a págin a inicial
      * 
      * @return void
      * 

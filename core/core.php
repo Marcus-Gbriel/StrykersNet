@@ -8,8 +8,10 @@
  * @version 0.0.1
  * 
  */
-class core
+class Core
 {
+    private static $loaded = false;
+
     /**
      * 
      * Construtor do núcleo
@@ -31,9 +33,12 @@ class core
      */
     private function init(): void
     {
-        $this->load_dependencies();
-        $this->load_config();
-        $this->verify_directories();
+        if (!self::$loaded) {
+            $this->load_dependencies();
+            Config::load();
+            $this->verify_directories();
+            self::$loaded = true;
+        }
     }
 
     /**
@@ -50,6 +55,7 @@ class core
                 '/sources/controllers/',
                 '/core/',
                 '/routes/',
+                '/core/Router/'
             ];
 
             foreach ($directories as $directory) {
@@ -60,33 +66,6 @@ class core
                 }
             }
         });
-    }
-
-    /**
-     * 
-     * Carrega o arquivo de configuração
-     * 
-     * @return void
-     * 
-     */
-    private function load_config(): void
-    {
-        $config_file = DOCUMENT_ROOT . '/config.json';
-        if (!file_exists($config_file)) {
-            $this->log('Config file not found: ' . $config_file, 'ERROR');
-            $this->error();
-            return;
-        }
-
-        $config = json_decode(file_get_contents($config_file), true);
-
-        if (json_last_error() !== JSON_ERROR_NONE) {
-            $this->log('Error decoding JSON config: ' . json_last_error_msg(), 'ERROR');
-            $this->error();
-            return;
-        }
-
-        define('CONFIG', $config);
     }
 
     /**
@@ -123,9 +102,11 @@ class core
      * @return void
      * 
      */
-    public function error(int $code = 500): void
+    public static function error(int $code = 500): void
     {
         http_response_code($code);
+        echo "An error occurred. Please try again later.";
+        exit();
     }
 
     /**
@@ -137,7 +118,7 @@ class core
      * @return void
      * 
      */
-    public function log(string $message, $level = 'INFO'): void
+    public static function log(string $message, $level = 'INFO'): void
     {
         $document_file = DOCUMENT_ROOT . '/storage/logs/' . date('Y_m_d') . '.log';
         $log_message = sprintf("[%s] [%s]: %s\n", date('Y-m-d H:i:s'), $level, $message);

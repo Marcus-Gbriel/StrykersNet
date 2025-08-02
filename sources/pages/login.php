@@ -1,3 +1,10 @@
+<?php
+$session = new Session();
+if ($session->get('logged_in')) {
+    header('Location: /web');
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-br" data-bs-theme="dark">
 

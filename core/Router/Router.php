@@ -21,25 +21,52 @@ class Router
      */
     private static $routes = [
         'GET' => [
-            /*
             'home' => [
                 'controller' => 'PageController@home',
+                'middlewares' => []
+            ],
+            'about' => [
+                'controller' => 'PageController@about',
+                'middlewares' => []
+            ],
+            'contact' => [
+                'controller' => 'PageController@contact',
+                'middlewares' => []
+            ],
+            'divisions' => [
+                'controller' => 'PageController@divisions',
+                'middlewares' => []
+            ],
+            'login' => [
+                'controller' => 'PageController@login',
                 'middlewares' => ['auth', 'log']
             ],
-            */
-            'home' => 'PageController@home',
-            'about' => 'PageController@about',
-            'contact' => 'PageController@contact',
-            'divisions' => 'PageController@divisions',
-            'login' => 'PageController@login',
-            'web' => 'SystemController@index',
-            'logout' => 'SystemController@logout',
-            'robots.txt' => 'PageController@robots',
-            'public' => 'PublicController@index',
-            'api' => 'ApiController@index',
+            'web' => [
+                'controller' => 'SystemController@index',
+                'middlewares' => ['auth', 'log']
+            ],
+            'logout' => [
+                'controller' => 'SystemController@logout',
+                'middlewares' => ['auth', 'log']
+            ],
+            'robots.txt' => [
+                'controller' => 'PageController@robots',
+                'middlewares' => []
+            ],
+            'public' => [
+                'controller' => 'PublicController@index',
+                'middlewares' => []
+            ],
+            'api' => [
+                'controller' => 'ApiController@index',
+                'middlewares' => []
+            ],
         ],
         'POST' => [
-            'api' => 'ApiController@index',
+            'api' => [
+                'controller' => 'ApiController@index',
+                'middlewares' => []
+            ],
         ],
         'PUT' => [],
         'DELETE' => [],
@@ -70,10 +97,10 @@ class Router
      */
     private function init(): void
     {
-        $route = $this->get_request_uri(0);
-        $method = $this->get_method_uri();
+        $route = $this->getRequestUri(0);
+        $method = $this->getMethodUri();
 
-        $this->handle_request($method, $route);
+        $this->handleRequest($method, $route);
     }
 
     /**
@@ -85,7 +112,7 @@ class Router
      * @return void
      * 
      */
-    private function handle_request(string $method, string $route): void
+    private function handleRequest(string $method, string $route): void
     {
         if (!isset(self::$routes[$method][$route])) {
             $this->core->error(404);
@@ -101,8 +128,8 @@ class Router
             return;
         }
 
-        $controller_method = self::$routes[$method][$route];
-        if (!$this->verify_route($controller_method)) {
+        $controller_method = self::$routes[$method][$route]['controller'];
+        if (!$this->verifyRoute($controller_method)) {
             $this->core->error(500);
             $this->core->log("Rota inválida: $controller_method");
             return;
@@ -122,7 +149,7 @@ class Router
      * @return string
      * 
      */
-    public function get_request_uri(int $level): string
+    public static function getRequestUri(int $level): string
     {
         $uri = $_SERVER['REQUEST_URI'];
         $parts = explode('/', trim($uri, '/'));
@@ -140,7 +167,7 @@ class Router
      * @return string
      * 
      */
-    public function get_method_uri(): string
+    public static function getMethodUri(): string
     {
         return $_SERVER['REQUEST_METHOD'] ?? 'GET';
     }
@@ -154,7 +181,7 @@ class Router
      * @return bool
      * 
      */
-    private function verify_route(string $class_method): bool
+    private function verifyRoute(string $class_method): bool
     {
         $class_method = explode('@', $class_method);
         if (count($class_method) !== 2) {

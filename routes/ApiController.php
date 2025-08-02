@@ -60,8 +60,8 @@ class ApiController
     {
         header('Content-Type: application/json');
 
-        $method = $this->router->get_method_uri();
-        $route = $this->router->get_request_uri(1);
+        $method = $this->router->getMethodUri();
+        $route = $this->router->getRequestUri(1);
 
         if (!$this->route_exists($method, $route)) {
             $this->response(

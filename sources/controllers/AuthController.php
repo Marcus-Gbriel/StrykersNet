@@ -19,6 +19,7 @@ class AuthController
         $this->core = $core;
         $this->router = $router;
         $this->api_controller = $api_controller;
+        $this->session = new Session();
         $this->handleRequest();
     }
 

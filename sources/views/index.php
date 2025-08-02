@@ -14,6 +14,7 @@
 
 <body>
     <div class="header_system">
+        <i class="bi bi-list menu-toggle"></i>
         <div class="perfil_system">
             <img src="/public/IMG_20210922_224101_626.jpg">
             <div class="perfil_info">
@@ -27,11 +28,67 @@
         <div class="sidebar_content">
             <div class="sidebar_subcontent">
                 <span>bem vindo a side bar</span>
-                <span>tomeeeee</span>
+                <span>testeeeee</span>
             </div>
         </div>
     </div>
     <div class="content_system">
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
+        <span>teste</span>
 
     </div>
     <style>
@@ -40,18 +97,22 @@
             background-image: url('/public/background-account.svg');
             background-size: cover;
 
+            .menu-toggle {
+                font-size: 35px;
+            }
+
             .sidebar_system {
                 width: 100vw;
                 height: 100vh;
                 position: fixed;
                 z-index: 1;
-                background-color: rgba(0, 0, 0, 0.3);
+                background-color: rgba(0, 0, 0, 0.4);
                 transition: width 0.5s ease-in-out, opacity 0.5s ease-in-out;
 
                 .sidebar_content {
-                    width: 300px;
+                    width: 0;
                     height: 100%;
-                    background-color: #003b4f;
+                    background-color: #011e29;
                     padding: calc(70px + 10px) 10px;
                     transition: width 1s ease-in-out, opacity 1s ease-in-out;
 
@@ -80,7 +141,7 @@
                     opacity: 1;
 
                     .sidebar_content {
-                        width: 300px;
+                        width: 440px;
                         opacity: 1;
                     }
                 }
@@ -150,7 +211,6 @@
                 this.sidebarSubcontent = $('.sidebar_subcontent');
 
                 this.init();
-
             }
 
             init() {
@@ -161,6 +221,14 @@
                 this.sidebarContent.on('mouseleave', () => {
                     this.close();
                 });
+
+                $('.menu-toggle').on('click', () => {
+                    if (this.sidebar.hasClass('closed')) {
+                        this.open();
+                    } else {
+                        this.close();
+                    }
+                });
             }
 
             open() {
@@ -168,6 +236,7 @@
                 setTimeout(() => {
                     this.sidebarSubcontent.css('opacity', '1');
                 }, 500);
+                $('.menu-toggle').removeClass('bi-list').addClass('bi-x');
             }
 
             close() {
@@ -175,11 +244,9 @@
                 setTimeout(() => {
                     this.sidebarSubcontent.css('opacity', '0');
                 }, 500);
+                $('.menu-toggle').removeClass('bi-x').addClass('bi-list');
             }
         }
-
-
-
 
         new sidebar();
     </script>
