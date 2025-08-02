@@ -36,7 +36,7 @@ class AuthController
          * Implementar uma forma melhor de tratar a requisição de login
          * 
          */
-        $database = database::getInstance($this->core);
+        $database = Database::getInstance($this->core);
 
         $username = $this->api_controller->sanitize_input($_POST['username'] ?? '');
         $password = $this->api_controller->sanitize_input($_POST['password'] ?? '');
@@ -67,6 +67,6 @@ class AuthController
 
     private function handleRequest(): void
     {
-        $this->session = new session();
+        $this->session = new Session();
     }
 }

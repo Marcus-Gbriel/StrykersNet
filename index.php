@@ -12,7 +12,7 @@
 date_default_timezone_set('America/Sao_Paulo');
 define('DOCUMENT_ROOT', __DIR__);
 
-require_once DOCUMENT_ROOT . '/core/core.php';
+require_once DOCUMENT_ROOT . '/core/Core.php';
 
-$core = new core();
-new router($core);
+$core = new Core();
+new Router($core);

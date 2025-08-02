@@ -17,8 +17,8 @@ class PublicController
      * 
      * Contrutor do controlador público
      * 
-     * @param core $core Instância do núcleo
-     * @param router $router Instância do roteador
+     * @param Core $core Instância do núcleo
+     * @param Router $router Instância do roteador
      * @return void
      * 
      */

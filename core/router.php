@@ -8,7 +8,7 @@
  * @version 0.0.1
  * 
  */
-class router
+class Router
 {
     private $core = null;
 
@@ -21,6 +21,12 @@ class router
      */
     private static $routes = [
         'GET' => [
+            /*
+            'home' => [
+                'controller' => 'PageController@home',
+                'middlewares' => ['auth', 'log']
+            ],
+            */
             'home' => 'PageController@home',
             'about' => 'PageController@about',
             'contact' => 'PageController@contact',

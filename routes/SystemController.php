@@ -4,33 +4,27 @@ class SystemController
 {
     private $core = null;
     private $router = null;
+    private $session = null;
+    private $database = null;
 
     public function __construct(Core $core, Router $router)
     {
-        $this->core = $core;
-        $this->router = $router;
+        $this->session = new Session();
         $this->verify_access();
     }
 
     public function index(): void
     {
-        // Implementação do método para lidar com requisições ao sistema
-        // Aqui você pode definir a lógica para exibir a página principal do sistema
-        // ou redirecionar para outra página conforme necessário.
+        new Database();
         require_once DOCUMENT_ROOT . '/sources/views/index.php';
+        
     }
 
     private function verify_access(): void
     {
-        //verifica se a sessão está ativa
-        if (session_status() !== PHP_SESSION_ACTIVE) {
-            session_start();
-        }
+        //new Database();
 
-        if ($_SESSION['logged_in'] !== true) {
-            header('Location: /login');
-            exit();
-        }
+        
     }
 
     public function logout(): void

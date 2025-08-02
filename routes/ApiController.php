@@ -27,7 +27,7 @@ class ApiController
      * Construtor do controlador de API
      * 
      * @param Core $core
-     * @param router $router
+     * @param Router $router
      * 
      */
     public function __construct($core, $router)
