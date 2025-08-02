@@ -36,8 +36,6 @@ class AuthController
          * Implementar uma forma melhor de tratar a requisição de login
          * 
          */
-        $database = Database::getInstance($this->core);
-
         $username = $this->api_controller->sanitize_input($_POST['username'] ?? '');
         $password = $this->api_controller->sanitize_input($_POST['password'] ?? '');
 
@@ -45,9 +43,12 @@ class AuthController
             $this->api_controller->response('login data cannot be empty', 400);
         }
 
-        $result = $database->query("SELECT * FROM users WHERE username = :username", [
-            ':username' => $username
-        ]);
+        $result = Database::query(
+            "SELECT * FROM users WHERE username = :username",
+            [
+                ':username' => $username
+            ]
+        );
         $result = $result->fetch(PDO::FETCH_ASSOC);
 
         if (!$result) {
